@@ -48,8 +48,8 @@ function Doctors({ id }) {
             </ListGroup>
             <Card.Body>
               <div className="row">
-                <div className="col-5"><Card.Link href="#"><EditDoctor doctorId={d.id}></EditDoctor></Card.Link></div>
-                <div className="col-4"><Card.Link href="#"><button className='btn btn-danger btn-sm' onClick={()=>{handleDelete(d.id)}}>Delete</button></Card.Link></div>
+                <div className="col-5"><Card.Link ><EditDoctor doctorId={d.id} specialId={id} setRefresh={setRefresh}></EditDoctor></Card.Link></div>
+                <div className="col-4"><Card.Link ><button className='btn btn-danger btn-sm' onClick={()=>{handleDelete(d.id)}}>Delete</button></Card.Link></div>
               </div>
             </Card.Body>
           </Card>

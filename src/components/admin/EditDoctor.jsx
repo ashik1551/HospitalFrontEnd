@@ -2,16 +2,23 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { retrieveDoctorData } from '../../services/api';
+import { getSpecializationApi, retrieveDoctorData, updateDoctorApi } from '../../services/api';
 
-function EditDoctor({ doctorId }) {
+function EditDoctor({ doctorId,specialId,setRefresh }) {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        getDoctor()
+    }
     const handleShow = () => setShow(true);
 
-    const [doctor, setDoctor] = useState({ name: '', age: '', experience: '', image: null })
+    const [doctor, setDoctor] = useState()
+
+    const [specializationData,setSpecializationData]=useState()
+    
+    const [specializationId,setSpecializationId]=useState()
 
     async function getDoctor() {
         let res = await retrieveDoctorData(doctorId)
@@ -20,8 +27,41 @@ function EditDoctor({ doctorId }) {
         }
     }
 
+    async function getSpecialization() {
+        let res=await getSpecializationApi()
+        if(res.status>199 && res.status<300){
+            setSpecializationData(res.data);
+        }
+    }
+
+    async function handleSubmit(event){
+        event.preventDefault()
+        let fileInput = document.getElementById('image');
+        let spId
+        if(isNaN(doctor.specialization)){
+            spId=specializationId
+        }
+        else{
+            spId=doctor.specialization
+        }
+
+        if (fileInput.files.length === 0) {
+            delete doctor.image;
+        }
+        
+        let res=await updateDoctorApi(spId,doctor,doctorId)
+        if(res.status>199 && res.status<300){
+            handleClose()
+            setRefresh(Math.random())
+        }
+        
+        
+    }
+
     useEffect(() => {
         getDoctor()
+        getSpecialization()
+        setSpecializationId(specialId)
     }, [])
 
     return (
@@ -42,22 +82,31 @@ function EditDoctor({ doctorId }) {
                 <Modal.Body>
 
                     {doctor ? <div className="border rounded p-3">
-                        <form action="">
+                        <form action="" onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label htmlFor="">Name</label>
                                 <input type="text" value={doctor.name} onChange={(e)=>setDoctor({...doctor,name:e.target.value})} required className="form-control" />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="">Age</label>
-                                <input type="text" value={doctor.age} onChange={(e)=>setDoctor({...doctor,age:e.target.value})} required className="form-control" />
+                                <input type="number" value={doctor.age} onChange={(e)=>setDoctor({...doctor,age:e.target.value})} required className="form-control" />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="">Experience</label>
-                                <input type="text" value={doctor.experience} onChange={(e)=>setDoctor({...doctor,experience:e.target.value})} required className="form-control" />
+                                <input type="number" value={doctor.experience} onChange={(e)=>setDoctor({...doctor,experience:e.target.value})} required className="form-control" />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="">Specialization</label>
+                                <select value={specializationId} id={specializationId} onChange={(e)=>{setDoctor({...doctor,specialization:e.target.value})
+                            setSpecializationId(e.target.value)}} className="from-control">
+                                    {specializationData && specializationData.map((s,i)=>
+                                    <option key={i} value={s.id}>{s.title}</option>
+                                    )}
+                                </select>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="">Image</label>
-                                <input type="file" accept='image/*' onChange={(e)=>setDoctor({...doctor,image:e.target.files[0]})} required className="form-control" />
+                                <input type="file" accept='image/*' id='image' onChange={(e)=>setDoctor({...doctor,image:e.target.files[0]})} className="form-control" />
                             </div>
                             <div className="mb-3">
                                 <Button variant="secondary" onClick={handleClose}>

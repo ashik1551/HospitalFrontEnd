@@ -87,6 +87,17 @@ export async function createDoctorApi(id,data){
 
 }
 
+export async function updateDoctorApi(spId,data,docId){
+
+    let headers={
+        "Authorization":"Bearer "+localStorage.getItem('access'),
+        "Content-Type":"multipart/form-data"
+    }
+
+    return await axios.put(Base_Url+`${spId}/doctor/${docId}/`,data,{headers:headers})
+
+}
+
 export async function deleteDoctorApi(id){
     
     return await axios.delete(Base_Url+`doctor/${id}/`,{headers:getHeaders()})
