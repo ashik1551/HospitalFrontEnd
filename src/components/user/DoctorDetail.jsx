@@ -38,7 +38,7 @@ function DoctorDetail({ doctorId }) {
         if (bookingDate["booking_date"]) {
             let res = await createBookingApi(doctorId, bookingDate)
             if (res.status > 199 && res.status < 300) {
-                alert(`Appoinment Booked Successfully...\nYour Booking Date : ${res.data["booking_date"]}\nYour Booking No : ${res.data["booking_no"]}`)
+                alert(`Your Appoinment Booked Successfully...\nBooking Date : ${res.data["booking_date"]}\nBooking No : ${res.data["booking_no"]}`)
                 handleClose()
                 navigate("/user/booking/")
             }

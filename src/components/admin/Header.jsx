@@ -21,6 +21,7 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link className='text-light' onClick={()=>{navigate('/admin/home/')}} >Home</Nav.Link>
+                            <Nav.Link className='text-light' onClick={()=>{navigate('/admin/booking/')}} >Appoinments</Nav.Link>
                             <Nav.Link className='text-light' onClick={()=>{navigate('/admin/doctor/')}} >Doctors</Nav.Link>
                         </Nav>
                         <Nav>

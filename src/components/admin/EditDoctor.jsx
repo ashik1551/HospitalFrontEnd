@@ -98,7 +98,7 @@ function EditDoctor({ doctorId,specialId,setRefresh }) {
                             <div className="mb-3">
                                 <label htmlFor="">Specialization</label>
                                 <select value={specializationId} id={specializationId} onChange={(e)=>{setDoctor({...doctor,specialization:e.target.value})
-                            setSpecializationId(e.target.value)}} className="from-control">
+                            setSpecializationId(e.target.value)}} className="form-control">
                                     {specializationData && specializationData.map((s,i)=>
                                     <option key={i} value={s.id}>{s.title}</option>
                                     )}

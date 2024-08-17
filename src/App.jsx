@@ -9,6 +9,7 @@ import AdminHome from './pages/AdminHome';
 import AdminDoctors from './pages/AdminDoctors';
 import Doctors from './components/admin/Doctors';
 import AdminDoctor from './pages/AdminDoctor';
+import AdminBooking from './pages/AdminBooking';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path='/admin/home/' element={<AdminHome></AdminHome>}></Route>
       <Route path='/admin/doctor/' element={<AdminDoctors></AdminDoctors>}></Route>
       <Route path='/admin/doctor/:id/' element={<AdminDoctor></AdminDoctor>}></Route>
+      <Route path='/admin/booking/' element={<AdminBooking></AdminBooking>}></Route>
 
       </Routes>
       

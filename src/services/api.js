@@ -76,6 +76,12 @@ export async function getBookingList(){
 
 }
 
+export async function getBookingListAdmin(link){
+    
+    return await axios.get(Base_Url+`booking/admin/${link}`,{headers:getHeaders()})
+
+}
+
 export async function createDoctorApi(id,data){
 
     let headers={
@@ -101,5 +107,11 @@ export async function updateDoctorApi(spId,data,docId){
 export async function deleteDoctorApi(id){
     
     return await axios.delete(Base_Url+`doctor/${id}/`,{headers:getHeaders()})
+
+}
+
+export async function getDoctorApi(){
+
+    return await axios.get(Base_Url+'doctor/',{headers:getHeaders()})
 
 }
