@@ -7,7 +7,6 @@ import UserDoctor from './pages/UserDoctor';
 import UserBooking from './pages/UserBooking';
 import AdminHome from './pages/AdminHome';
 import AdminDoctors from './pages/AdminDoctors';
-import Doctors from './components/admin/Doctors';
 import AdminDoctor from './pages/AdminDoctor';
 import AdminBooking from './pages/AdminBooking';
 

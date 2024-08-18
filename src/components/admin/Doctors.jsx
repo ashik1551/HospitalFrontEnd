@@ -18,7 +18,10 @@ function Doctors({ id }) {
   }
 
   async function handleDelete(id) {
-    let res=await deleteDoctorApi(id)
+    let c=confirm("Are you sure...?")
+    if(c){
+      let res=await deleteDoctorApi(id)
+    }
       getData()
   }
 

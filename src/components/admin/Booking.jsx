@@ -57,7 +57,9 @@ function Booking() {
 
     return (
         <div className='container'>
-            <div className="mb-2 border rounded p-3">
+            <div className="mb-3 border rounded p-3">
+            <div className="mb-3 text-center fs-2 fw-medium">Online Bookings</div>
+
                 <div className="row">
                     <div className="col-2"></div>
 
@@ -68,7 +70,7 @@ function Booking() {
                     <div className="col-3">
                         <label htmlFor="">Doctor</label>
                         <select  className="form-control" onChange={handleDoctor}>
-                            <option value="" selected>select</option>
+                            <option value="" selected>All</option>
                             {doctor && doctor.map((d,i)=>
                             <option key={i} value={d.id}>{d.name}</option>)}
                         </select>
@@ -81,7 +83,6 @@ function Booking() {
                 </div>
             </div>
             <div className="mb-2 border rounded p-3">
-                <div className="mb-3 text-center fs-2 fw-medium">Online Bookings</div>
                 <Table striped bordered hover variant="light">
                     <thead>
                         <tr>
